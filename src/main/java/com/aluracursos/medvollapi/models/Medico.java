@@ -1,5 +1,7 @@
 package com.aluracursos.medvollapi.models;
 
+import com.aluracursos.medvollapi.dto.DatosActualizarMedico;
+import com.aluracursos.medvollapi.dto.DatosDireccion;
 import com.aluracursos.medvollapi.dto.DatosRegistroMedico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // genera un constructor sin argumentos default
 @AllArgsConstructor // genera un constructor con todos los argumentos
 @EqualsAndHashCode(of = "id") //compara los hashcode segun el id, si dos objetos son iguales según el método equals, deben tener el mismo valor de hashCode.
+
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +38,29 @@ public class Medico {
         this.especialidad = parametros.especialidad();
         this.direccion = new Direccion(parametros.direccion());
     };
+
+    public Medico(String nombre, String email, Integer telefono, Integer documento, Especialidad especialidad, DatosDireccion direccion) {
+        this.nombre = nombre;
+        this.email = email;
+        this.telefono = telefono;
+        this.documento = documento;
+        this.especialidad = especialidad;
+        this.direccion = new Direccion(direccion);
+    }
+
+    public void actualizarDatosMedico(DatosActualizarMedico datosActualizarMedico){
+        if(datosActualizarMedico.nombre() != null){
+            this.nombre = datosActualizarMedico.nombre();
+        }
+        if(datosActualizarMedico.documento() != null){
+            this.documento = datosActualizarMedico.documento();
+        }
+        if (datosActualizarMedico.direccion() != null){
+            this.direccion = direccion.datosActualizaDireccion(datosActualizarMedico.direccion());
+        }
+    }
+
+
 }
 
 

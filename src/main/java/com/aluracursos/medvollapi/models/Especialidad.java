@@ -3,7 +3,26 @@ package com.aluracursos.medvollapi.models;
 public enum Especialidad {
     ORTOPEDIA("Ortopedia"),
     PEDIATRIA("Pediatría"),
-
+    CARDIOLOGIA("Cardiología"),
+    NEUROLOGIA("Neurología"),
+    GINECOLOGIA("Ginecología"),
+    DERMATOLOGIA("Dermatología"),
+    UROLOGIA("Urología"),
+    GENETICA("Genética"),
+    NUTRICION("Nutrición"),
+    PSIQUIATRIA("Psiquiatría"),
+    TOXICOLOGIA("Toxicología"),
+    GASTROENTEROLOGIA("Gastroenterología"),
+    ENDOCRINOLOGIA("Endocrinología"),
+    GERIATRIA("Geriatría"),
+    HEMATOLOGIA("Hematología"),
+    INFECTOLOGIA("Infectología"),
+    OFTALMOLOGIA("Oftalmología"),
+    ANIMAL_SERVICIO("Animal de servicio"),
+    TRAUMATOLOGIA("Traumatología"),
+    ALERGOLOGIA("Alergología"),
+    RADIOLOGIA("Radiología"),
+    ADMINISTRACION("Administración")
     ;
 
 
