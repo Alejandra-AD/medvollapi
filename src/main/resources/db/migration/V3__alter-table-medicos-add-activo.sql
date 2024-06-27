@@ -1,0 +1,1 @@
+alter table medicos add activo smallint not null DEFAULT 1;

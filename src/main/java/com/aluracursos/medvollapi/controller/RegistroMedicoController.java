@@ -46,7 +46,9 @@ public class RegistroMedicoController {
 
     @GetMapping
     public Page<DatosEnvioMedicos> listaMedicos(@PageableDefault(size = 10,sort = "nombre") Pageable paginacion){
-        return medicoRepository.findAll(paginacion)
+        /*return medicoRepository.findAll(paginacion)
+                .map(m->new DatosEnvioMedicos(m.getNombre(),m.getEmail(),m.getDocumento(),m.getEspecialidad()));*/
+        return medicoRepository.findByActivoTrue(paginacion)
                 .map(m->new DatosEnvioMedicos(m.getNombre(),m.getEmail(),m.getDocumento(),m.getEspecialidad()));
     }
 
@@ -60,12 +62,30 @@ public class RegistroMedicoController {
 
     }
 
- /* Este es un delete permanente de la base de datos pero no se suele usar para conservar un registro
+ /* version 1: Este es un delete permanente de la base de datos pero no se suele usar para conservar un registro
     @Transactional
     @DeleteMapping
     public void eliminarRegistroMedicos(@RequestBody @Valid DatosActualizarMedico eliminarMedico){
         medicoRepository.deleteById(eliminarMedico.id());
     }*/
+
+    /*
+    version2: borrar de la base de datos por pathvariable
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void eliminarRegistroMedico2(@PathVariable Long id){
+        Medico medico = medicoRepository.getReferenceById(id);
+        medicoRepository.delete(medico);
+    }*/
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void eliminarMedicoInactivos(@PathVariable Long id ){
+        Medico medico = medicoRepository.getReferenceById(id);
+        medico.eliminarMedico();
+
+    }
+
 
 
 }
