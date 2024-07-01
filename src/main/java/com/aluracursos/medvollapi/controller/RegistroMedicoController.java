@@ -51,11 +51,11 @@ public class RegistroMedicoController {
     }*/
 
     @GetMapping
-    public Page<DatosEnvioMedicos> listaMedicos(@PageableDefault(size = 10,sort = "nombre") Pageable paginacion){
+    public ResponseEntity<Page<DatosEnvioMedicos>> listaMedicos(@PageableDefault(size = 10,sort = "nombre") Pageable paginacion){
         /*return medicoRepository.findAll(paginacion)
                 .map(m->new DatosEnvioMedicos(m.getNombre(),m.getEmail(),m.getDocumento(),m.getEspecialidad()));*/
-        return medicoRepository.findByActivoTrue(paginacion)
-                .map(m->new DatosEnvioMedicos(m.getNombre(),m.getEmail(),m.getDocumento(),m.getEspecialidad()));
+        return ResponseEntity.ok(medicoRepository.findByActivoTrue(paginacion)
+                .map(m->new DatosEnvioMedicos(m.getNombre(),m.getEmail(),m.getDocumento(),m.getEspecialidad())));
     }
 
 
