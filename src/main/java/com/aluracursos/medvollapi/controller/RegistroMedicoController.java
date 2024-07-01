@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +26,7 @@ public class RegistroMedicoController {
     private MedicoRepository medicoRepository;
 
     @PostMapping
-    public void registroMedico(@RequestBody @Valid List<DatosRegistroMedico> datosRegistroMedico){
+    public ResponseEntity<DatosEnvioMedicos> registroMedico(@RequestBody @Valid DatosRegistroMedico datosRegistroMedico, UriComponentsBuilder uriComponentsBuilder){
         /*System.out.println("\nNombre: " + parametros.nombre() +
                 "\nEmail: " + parametros.email()+
                 "\nDocumento: "+ parametros.documento()+
@@ -31,10 +34,13 @@ public class RegistroMedicoController {
                 "\nDirección: "+ parametros.direccion().calle()+","+parametros.direccion().numero()+
                 ". "+parametros.direccion().ciudad().toUpperCase());*/
 
-        datosRegistroMedico.stream()
-                .forEach(m->medicoRepository
-                        .save(new Medico(m.nombre(),m.email(),m.telefono(),m.documento(),m.especialidad(),m.direccion())));
-
+        //tiene que retornar un 201 mas una url donde se pueda encontrar en este caso el registro del médico
+        Medico medico = new Medico(datosRegistroMedico);
+        medicoRepository.save(medico);
+        DatosEnvioMedicos datosEnvioMedicos= new DatosEnvioMedicos(medico.getNombre(),medico.getEmail(),medico.getDocumento(),
+                medico.getEspecialidad());
+        URI url = uriComponentsBuilder.path("/registromedico/{id}").buildAndExpand(medico.getId()).toUri();
+        return ResponseEntity.created(url).body(datosEnvioMedicos);
     }
 
  /*   @GetMapping
@@ -55,10 +61,12 @@ public class RegistroMedicoController {
 
     @Transactional
     @PutMapping
-    public void actualizarRegistroMedicos(@RequestBody @Valid DatosActualizarMedico actualizarMedico){
+    public ResponseEntity actualizarRegistroMedicos(@RequestBody @Valid DatosActualizarMedico actualizarMedico){
         Medico medico = medicoRepository.getReferenceById(actualizarMedico.id());//crea una instancia de médico segun id
-        medico.actualizarDatosMedico(actualizarMedico);//llama a metodo en médico para actualizar los datos y envia como parametro lo que recibe del cliente.
+        medico.actualizarDatosMedico(actualizarMedico);
         //lo que recibe del cliente es id de manera obligatoria y el/los parametro/os que desea actualizar
+        return ResponseEntity.ok(new DatosActualizarMedico(medico.getId(),medico.getNombre()
+                ,medico.getDocumento(),medico.getDireccion(),medico.getActivo()));
 
     }
 
@@ -80,9 +88,10 @@ public class RegistroMedicoController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void eliminarMedicoInactivos(@PathVariable Long id ){
+    public ResponseEntity eliminarMedicoInactivos(@PathVariable Long id ){
         Medico medico = medicoRepository.getReferenceById(id);
         medico.eliminarMedico();
+        return ResponseEntity.noContent().build();
 
     }
 
