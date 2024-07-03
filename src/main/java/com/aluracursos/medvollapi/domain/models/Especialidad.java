@@ -1,4 +1,4 @@
-package com.aluracursos.medvollapi.models;
+package com.aluracursos.medvollapi.domain.models;
 
 public enum Especialidad {
     ORTOPEDIA("Ortopedia"),

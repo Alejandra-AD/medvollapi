@@ -1,6 +1,6 @@
-package com.aluracursos.medvollapi.models;
+package com.aluracursos.medvollapi.domain.models;
 
-import com.aluracursos.medvollapi.dto.DatosDireccion;
+import com.aluracursos.medvollapi.domain.dto.DatosDireccion;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

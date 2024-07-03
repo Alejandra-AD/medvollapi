@@ -1,6 +1,6 @@
-package com.aluracursos.medvollapi.dto;
+package com.aluracursos.medvollapi.domain.dto;
 
-import com.aluracursos.medvollapi.models.Direccion;
+import com.aluracursos.medvollapi.domain.models.Direccion;
 import jakarta.validation.constraints.NotNull;
 
 public record DatosActualizarMedico(

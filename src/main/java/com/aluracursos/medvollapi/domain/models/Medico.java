@@ -1,8 +1,8 @@
-package com.aluracursos.medvollapi.models;
+package com.aluracursos.medvollapi.domain.models;
 
-import com.aluracursos.medvollapi.dto.DatosActualizarMedico;
-import com.aluracursos.medvollapi.dto.DatosDireccion;
-import com.aluracursos.medvollapi.dto.DatosRegistroMedico;
+import com.aluracursos.medvollapi.domain.dto.DatosActualizarMedico;
+import com.aluracursos.medvollapi.domain.dto.DatosRegistroMedico;
+import com.aluracursos.medvollapi.domain.dto.DatosDireccion;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

@@ -1,5 +1,4 @@
 package com.aluracursos.medvollapi.controller;
-import com.aluracursos.medvollapi.dto.DatosRegistroMedico;
 import org.springframework.web.bind.annotation.*;
 
 

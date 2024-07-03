@@ -1,7 +1,7 @@
-package com.aluracursos.medvollapi.Repository;
+package com.aluracursos.medvollapi.domain.Repository;
 
 
-import com.aluracursos.medvollapi.models.Medico;
+import com.aluracursos.medvollapi.domain.models.Medico;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

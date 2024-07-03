@@ -1,8 +1,6 @@
-package com.aluracursos.medvollapi.dto;
+package com.aluracursos.medvollapi.domain.dto;
 
-import com.aluracursos.medvollapi.models.Direccion;
-import com.aluracursos.medvollapi.models.Especialidad;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.aluracursos.medvollapi.domain.models.Especialidad;
 import jakarta.validation.constraints.*;
 
 public record DatosRegistroMedico(

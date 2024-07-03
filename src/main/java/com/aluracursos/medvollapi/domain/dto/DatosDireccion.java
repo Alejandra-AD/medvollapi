@@ -1,4 +1,4 @@
-package com.aluracursos.medvollapi.dto;
+package com.aluracursos.medvollapi.domain.dto;
 
 public record DatosDireccion(
         String calle,

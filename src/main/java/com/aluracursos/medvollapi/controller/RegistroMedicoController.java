@@ -1,9 +1,9 @@
 package com.aluracursos.medvollapi.controller;
-import com.aluracursos.medvollapi.Repository.MedicoRepository;
-import com.aluracursos.medvollapi.dto.DatosActualizarMedico;
-import com.aluracursos.medvollapi.dto.DatosEnvioMedicos;
-import com.aluracursos.medvollapi.dto.DatosRegistroMedico;
-import com.aluracursos.medvollapi.models.Medico;
+import com.aluracursos.medvollapi.domain.Repository.MedicoRepository;
+import com.aluracursos.medvollapi.domain.dto.DatosActualizarMedico;
+import com.aluracursos.medvollapi.domain.dto.DatosEnvioMedicos;
+import com.aluracursos.medvollapi.domain.dto.DatosRegistroMedico;
+import com.aluracursos.medvollapi.domain.models.Medico;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/registromedico")
