@@ -21,8 +21,9 @@ import java.net.URI;
 @RequestMapping("/login")
 public class AutenticacionController {
 
-   /* @Autowired
+    /*@Autowired
     private UsuarioRepository usuarioRepository;*/
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -34,14 +35,12 @@ public class AutenticacionController {
     URI url = uriComponentsBuilder.path("/login/{id}").buildAndExpand(usuario.getId()).toUri();
     return ResponseEntity.created(url).body(datosUsuarioRegistrado);
     }*/
-@PostMapping
-    public ResponseEntity autenticacionUsuario (@RequestBody @Valid DatosLoginUsuario datosLoginUsuario){
 
+    @PostMapping
+    public ResponseEntity autenticacionUsuario (@RequestBody @Valid DatosLoginUsuario datosLoginUsuario){
     Authentication token = new UsernamePasswordAuthenticationToken(datosLoginUsuario.login(),datosLoginUsuario.clave());
     authenticationManager.authenticate(token);
     return ResponseEntity.ok().build();
-
-
 }
 
 }
