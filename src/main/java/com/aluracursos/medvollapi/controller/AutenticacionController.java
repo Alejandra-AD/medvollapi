@@ -2,7 +2,9 @@ package com.aluracursos.medvollapi.controller;
 
 import com.aluracursos.medvollapi.domain.Repository.UsuarioRepository;
 import com.aluracursos.medvollapi.domain.dto.DatosLoginUsuario;
+import com.aluracursos.medvollapi.domain.dto.DatosTokenUsuario;
 import com.aluracursos.medvollapi.domain.models.Usuario;
+import com.aluracursos.medvollapi.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,9 @@ public class AutenticacionController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private TokenService tokenService;
+
 /*@PostMapping
   public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosLoginUsuario datosLoginUsuario, UriComponentsBuilder uriComponentsBuilder){
     var usuario = new Usuario(datosLoginUsuario);
@@ -38,9 +43,10 @@ public class AutenticacionController {
 
     @PostMapping
     public ResponseEntity autenticacionUsuario (@RequestBody @Valid DatosLoginUsuario datosLoginUsuario){
-    Authentication token = new UsernamePasswordAuthenticationToken(datosLoginUsuario.login(),datosLoginUsuario.clave());
-    authenticationManager.authenticate(token);
-    return ResponseEntity.ok().build();
+    Authentication tokenAuth = new UsernamePasswordAuthenticationToken(datosLoginUsuario.login(),datosLoginUsuario.clave());
+    var usuarioAuth = authenticationManager.authenticate(tokenAuth);
+    var tokenJWT = tokenService.generarToken((Usuario) usuarioAuth.getPrincipal());
+    return ResponseEntity.ok(new DatosTokenUsuario(tokenJWT));
 }
 
 }
