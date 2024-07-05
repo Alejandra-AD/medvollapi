@@ -31,7 +31,6 @@ public class TokenService {
             throw new RuntimeException();
         }
     }
-
     private Instant generarFechaExpiracion(){
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
 
