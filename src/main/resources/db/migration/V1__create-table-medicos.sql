@@ -11,3 +11,4 @@ create table medicos (
     ciudad varchar(100) not null,
     primary key (id)
 );
+
